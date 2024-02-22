@@ -1,0 +1,34 @@
+{
+  "name": "zkb",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "lint": "npx tsc --noEmit",
+    "build": "npx esbuild src/index.ts --outfile=dist/index.js --bundle --platform=node",
+    "dev": "npx esbuild src/index.ts --outfile=dist/index.js --bundle --platform=node --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/hast": "^3.0.3",
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^20.10.4",
+    "@types/unzipper": "^0.10.9",
+    "esbuild": "^0.19.9",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "commander": "^11.1.0",
+    "gray-matter": "^4.0.3",
+    "hast-util-from-parse5": "^8.0.1",
+    "hast-util-to-text": "^4.0.0",
+    "js-yaml": "^4.1.0",
+    "parse5": "^7.1.2",
+    "unist-util-visit": "^5.0.0",
+    "unzipper": "^0.10.14",
+    "xast-util-from-xml": "^4.0.0"
+  }
+}

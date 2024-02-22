@@ -1,0 +1,52 @@
+#!/usr/bin/env lua
+
+local function file_exists(name)
+   local f=io.open(name,"r")
+   if f~=nil then io.close(f) return true else return false end
+end
+
+local ext_pattern = '%.[^.]+$'
+local filename = arg[1]
+local metafile = string.gsub(filename, ext_pattern, function(ext)
+  return '.sdr/metadata' .. ext .. '.lua'
+end)
+if (not file_exists(metafile)) then
+  print("no metadata file found for " .. filename)
+  os.exit(1)
+end
+local meta = dofile(metafile)
+local doc_props = meta.__doc_props or {}
+local title = doc_props.title or filename
+local authors = doc_props.authors
+if authors then
+  title = title .. ' - ' .. authors
+end
+local highlight = meta.highlight or {}
+local quotes = {}
+for i, v in pairs(highlight) do
+  for j, w in pairs(v) do
+    table.insert(quotes, { i = i, j = j, chapter = w.chapter, text = w.text })
+  end
+end
+table.sort(quotes, function(a, b)
+  if a.i < b.i then
+    return true
+  end
+  if a.i > b.i then
+    return false
+  end
+  return a.j < b.j
+end)
+
+local chapter
+print('# ' .. title)
+for _, quote in ipairs(quotes) do
+  if chapter ~= quote.chapter then
+    chapter = quote.chapter
+    print()
+    print('## ' .. chapter)
+  end
+  print()
+  print(quote.text)
+end
+print()

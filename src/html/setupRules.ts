@@ -1,0 +1,43 @@
+import { initCounter, getCounter, setupRule } from "./rules";
+
+export function setupRules(counter: number) {
+  initCounter(counter);
+  setupRule("issued", "article:published_time");
+  setupRule("issued", "article:published_time");
+  setupRule("authors", "article:author");
+  setupRule("issued", "citation_year");
+  setupRule("issued", "citation_publication_date");
+  setupRule("title", "citation_title");
+  setupRule("authors", "citation_author");
+  setupRule("authors", "twitter:data1");
+  setupRule("authors", "twitter:creator");
+  setupRule("authors", "author");
+  setupRule("authors", "authors");
+  setupRule("language", "dc:language");
+  setupRule("publisher", "dc:publisher");
+  setupRule("authors", "dc:creator");
+  setupRule("description", "dc:description");
+  setupRule("issued", "dc:date");
+  setupRule("issued", "dc.date.created");
+  setupRule("issued", "dcterms.issued");
+  setupRule("modified", "dcterms.modified");
+  setupRule("modified", "dc.date.modified");
+  setupRule("title", "og:title");
+  setupRule("URL", "og:url");
+  setupRule("type", "og:type");
+  setupRule("authors", "og:author");
+  setupRule("title", "og:title");
+  setupRule("title", "citation_title");
+  setupRule("firstPage", "og:first_page");
+  setupRule("firstPage", "citation_first_page");
+  setupRule("lastPage", "og:last_page");
+  setupRule("lastPage", "citation_last_page");
+  setupRule("doi", "og:doi");
+  setupRule("doi", "citation_doi");
+  setupRule("source", "og:journal_title");
+  setupRule("source", "citation_journal_title");
+  setupRule("journalAbbrev", "og:journal_abbrev");
+  setupRule("journalAbbrev", "citation_journal_abbrev");
+  setupRule("description", "og:description");
+  return getCounter();
+}
