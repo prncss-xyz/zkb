@@ -11,6 +11,9 @@ import type { Citation } from "./interface";
 import yaml from "js-yaml";
 import { getLog, setLog } from "./log";
 
+// __dirname points to ./dist
+const fromSdr = __dirname + "/../from-sdr";
+
 const execFile = promisify(execFile_);
 
 async function getMeta(source: string) {
@@ -57,10 +60,9 @@ ${yaml.dump({
 ---
 `;
 
-  // __dirname points to ./dist
   let stdout = "";
   try {
-    const res = await execFile(__dirname + "/../from-sdr", [filename]);
+    const res = await execFile(fromSdr, [filename]);
     stdout = res.stdout;
   } catch (err) {
     // sinlently fails (nofile or parsing error)
@@ -89,13 +91,13 @@ ${content}`,
 
 program
   .command("meta <filename>")
-  .description("get metadata")
+  .description("show metadata")
   .option("-l, --log", "log")
   .action(meta);
 
 program
   .command("create <filename>")
-  .description("create a project")
+  .description("create a note based on filename")
   .option("-d, --dir <div>", "dir")
   .action(create);
 
